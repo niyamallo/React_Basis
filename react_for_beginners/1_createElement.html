@@ -1,0 +1,39 @@
+<!-- createElement()를 사용하는 방법. 더 쉽고 괜찮은 방법이 있으니까 쓸일 없지만,
+React가 어떤 식으로 돌아가는지 알아보자! -->
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <!-- 3. ReactDOM이 React element들을 가져다놓을 곳을 만들기위해
+        body에 비어있는 div를 생성 -->
+        <div id="root"></div>
+    </body>
+    <!-- 1. ReactJS가 element를 생성하고 event listener를 더하는 것을 도와줌 -->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <!-- 2. ReactDOM이 React element들을 가져다가 HTML로 바꿔줌 -->
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script>
+        // 4. root div를 가져온 후에,
+        const root = document.getElementById("root");
+        const h3 = React.createElement(
+            "h3",
+            {
+                id: "title",
+                onMouseEnter: () => console.log("mouse enter"),
+            },
+            "Hello I'm a h3"
+        );
+        const btn = React.createElement("button", {
+            onClick: () => console.log("i'm clicked"),
+            style: {
+                backgroundColor: "tomato",
+            }
+        },
+        "Click me!"
+        );
+        const container = React.createElement("div", null, [h3, btn]);
+        // 5. ReactDOM.render를 해준다
+        // render는 여기의 React element를 가지고 HTML로 만들어 배치한다는 것
+        ReactDOM.render(container, root); // React element들을 root div 안에서 보여주라는 뜻
+    </script>
+</html>
