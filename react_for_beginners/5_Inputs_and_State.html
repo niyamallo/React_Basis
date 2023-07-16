@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        function App() {
+        function MinutesToHours() {
             const [amount, setAmount] = React.useState(0);
             const [inverted, setInverted] = React.useState(false);
             const onChange = (event) => {
@@ -22,7 +22,6 @@
             return (
                 // jsx에서는 class 대신 className, for 대신 htmlFor를 사용해야함.
                 <div>
-                    <h1>Super Converter</h1>
                     <div>
                         <label htmlFor="minutes">Minutes</label>
                         <input
@@ -47,6 +46,32 @@
                     </div>
                     <button onClick={reset}>Reset</button>
                     <button onClick={onInvert}>{inverted ? "Turn Back": "Invert"}</button>
+                </div>
+            );
+        }
+        function KmToMiles() {
+            return <h3>KM 2 M</h3>
+        }
+
+        function App() {
+            const [index, setIndex] = React.useState("0");
+            const onSelect = (event) => {
+                setIndex(event.target.value);
+                console.log(event.target.value);
+            }
+
+            // 컴포넌트는 내부에 또 다른 컴포넌트를 랜더링 할 수 있다
+            // 그냥 타이핑하면 텍스트로 인식하지만 {} 안에 넣으면 자바스크립트로 인식.
+            return (
+                <div>
+                    <h1>Super Converter</h1>
+                    <select value={index} onChange={onSelect}>
+                        <option value="0">Minutes & Hours</option>
+                        <option value="1">Km & Miles</option>
+                    </select>
+                    <hr />
+                    {index === "0" ? <MinutesToHours /> : null}
+                    {index === "1" ? <KmToMiles /> : null}
                 </div>
             );
         }
